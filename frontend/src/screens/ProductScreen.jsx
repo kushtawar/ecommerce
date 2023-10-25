@@ -4,6 +4,7 @@ import {
   FaArrowLeft,
   FaChevronCircleLeft,
 } from 'react-icons/fa';
+import { useState } from 'react';
 import Message from '../components/Message';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -20,15 +21,28 @@ import {
 } from 'react-bootstrap';
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice';
 import Loader from '../components/Loader';
+import { addToCart } from '../slices/cartSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     data: product,
     isLoading,
     error,
   } = useGetProductDetailsQuery(productId);
   //const product = products.find((p) => p._id === productId);
+
+  const [qty, setQty] = useState(1);
+
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product, qty }));
+    navigate('/cart');
+  };
 
   return (
     <>
@@ -49,7 +63,7 @@ const ProductScreen = () => {
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
-                <ListGroup.Item text-center>
+                <ListGroup.Item>
                   <Rating
                     value={product.rating}
                     text={`${product.numReviews} reviews`}
@@ -80,18 +94,35 @@ const ProductScreen = () => {
                       </Col>
                     </Row>
                   </ListGroup.Item>
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Qty</Col>
-                      <Col>{product.countInStock}</Col>
-                    </Row>
-                  </ListGroup.Item>
+                  {product.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Qty</Col>
+                        <Col>
+                          <Form.Control
+                            as="select"
+                            value={qty}
+                            onChange={(e) => setQty(Number(e.target.value))}
+                          >
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
+                          </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )}
                   <ListGroup.Item>
                     <div className="d-flex justify-content-center">
                       <Button
                         className="btn-block"
                         type="button"
                         disabled={product.countInStock === 0}
+                        onClick={addToCartHandler}
                       >
                         Add To Cart
                       </Button>
