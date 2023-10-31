@@ -85,3 +85,35 @@ table th {
   max-height: 30px; /* Set your desired max height */
   margin-right: 15px;
 }
+
+.custom-dropdown {
+  font-size: 0.8em;
+  color: #c13c90;
+}
+
+.custom-dropdown-item {
+  font-size: small !important; /* Change the font size */
+  color: #080808 !important; /* Change the text color */
+}
+
+.headerRightMargin {
+  margin-right: 10px;
+}
+
+.dropdown-menu {
+  min-width: fit-content !important;
+  font-size: small !important; /* Change the font size */
+}
+
+#username {
+  width: fit-content;
+}
+
+.dropdown-menu.show {
+  margin-left: 40px;
+}
+
+.dropdown-menu.show .custom-dropdown-item:hover {
+  background-color: #366767;
+  color: #f9f3f7 !important;
+}

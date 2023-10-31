@@ -11,11 +11,33 @@ import {
 import React from 'react';
 import logo from '../assets/logo.png';
 import { LinkContainer } from 'react-router-bootstrap';
-import { UseSelector, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../slices/usersApiSlice';
+import { logout } from '../slices/authSlice';
 
 const Header = () => {
-  const { cartItems } = useSelector((statesss) => statesss.cart);
-  console.log(cartItems);
+  const { cartItems } = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation(); //RTK Mutation returns a tuplr
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      // NOTE: here we need to reset cart state for when a user logs out so the next
+      // user doesn't inherit the previous users cart and shipping
+      // dispatch(resetCart());
+      navigate('/login');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <header>
       <Navbar bg="primary" variant="dark" expand="md" collapseOnSelect>
@@ -31,9 +53,20 @@ const Header = () => {
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
                 <NavLink className="d-md-none">
-                  <FaShoppingCart /> Cart
+                  <FaShoppingCart /> {/* Cart */}
                   {cartItems.length > 0 && (
-                    <Badge pill bg="success" style={{ marginLeft: '5px' }}>
+                    <Badge
+                      pill
+                      bg="orange"
+                      style={{
+                        marginLeft: '0px',
+                        fontSize: '0.5em',
+                        position: 'relative',
+                        top: -9,
+                        right: -1,
+                        backgroundColor: 'orange',
+                      }}
+                    >
                       {cartItems.reduce((a, c) => a + c.qty, 0)}
                     </Badge>
                   )}
@@ -42,7 +75,10 @@ const Header = () => {
               <LinkContainer to="/cart">
                 <NavLink className="d-none d-md-inline">
                   <div
-                    style={{ position: 'relative', display: 'inline-block' }}
+                    style={{
+                      position: 'relative',
+                      display: 'inline-block',
+                    }}
                   >
                     <FaShoppingCart />
                     {cartItems.length > 0 && (
@@ -63,16 +99,41 @@ const Header = () => {
                   </div>
                 </NavLink>
               </LinkContainer>
-              <LinkContainer to="/login">
-                <NavLink className="d-md-none">
-                  <FaUser /> Sign In
-                </NavLink>
-              </LinkContainer>
-              <LinkContainer to="/login">
-                <NavLink href="/login" className="d-none d-md-block">
-                  <FaUser />
-                </NavLink>
-              </LinkContainer>
+              {userInfo ? (
+                <>
+                  <NavDropdown
+                    // Add a custom class to the NavDropdown
+                    title={userInfo.name}
+                    id="username"
+                    className="headerRightMargin"
+                  >
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item className="custom-dropdown-item">
+                        Profile
+                      </NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Item
+                      className="custom-dropdown-item"
+                      onClick={logoutHandler}
+                    >
+                      Logout
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              ) : (
+                <>
+                  <LinkContainer to="/login">
+                    <NavLink className="d-md-none">
+                      <FaUser /> Sign In
+                    </NavLink>
+                  </LinkContainer>
+                  <LinkContainer to="/login">
+                    <NavLink href="/login" className="d-none d-md-block">
+                      <FaUser />
+                    </NavLink>
+                  </LinkContainer>
+                </>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
