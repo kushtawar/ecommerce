@@ -1,14 +1,14 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Order from '../models/orderModel.js';
 import Product from '../models/productModel.js';
-import { calcPrices } from '../utils/calcPrices.js';
-import { verifyPayPalPayment, checkIfNewTransaction } from '../utils/paypal.js';
+//import { calcPrices } from '../utils/calcPrices.js';
+//import { verifyPayPalPayment, checkIfNewTransaction } from '../utils/paypal.js';
 
 // @desc    Create new order
 // @route   POST /api/orders
 // @access  Private
 const addOrderItems = asyncHandler(async (req, res) => {
-  const { orderItems, shippingAddress, paymentMethod } = req.body;
+  /*  const { orderItems, shippingAddress, paymentMethod } = req.body;
 
   if (orderItems && orderItems.length === 0) {
     res.status(400);
@@ -55,22 +55,24 @@ const addOrderItems = asyncHandler(async (req, res) => {
     const createdOrder = await order.save();
 
     res.status(201).json(createdOrder);
-  }
+  } */
+  res.json('create new order');
 });
 
 // @desc    Get logged in user orders
 // @route   GET /api/orders/myorders
 // @access  Private
 const getMyOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id });
-  res.json(orders);
+  /* const orders = await Order.find({ user: req.user._id });
+  res.json(orders); */
+  res.json('get my orders');
 });
 
 // @desc    Get order by ID
 // @route   GET /api/orders/:id
 // @access  Private
 const getOrderById = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id).populate(
+  /*  const order = await Order.findById(req.params.id).populate(
     'user',
     'name email'
   );
@@ -80,7 +82,8 @@ const getOrderById = asyncHandler(async (req, res) => {
   } else {
     res.status(404);
     throw new Error('Order not found');
-  }
+  } */
+  res.json('Get Order by ID');
 });
 
 // @desc    Update order to paid
@@ -89,7 +92,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 const updateOrderToPaid = asyncHandler(async (req, res) => {
   // NOTE: here we need to verify the payment was made to PayPal before marking
   // the order as paid
-  const { verified, value } = await verifyPayPalPayment(req.body.id);
+  /* const { verified, value } = await verifyPayPalPayment(req.body.id);
   if (!verified) throw new Error('Payment not verified');
 
   // check if this transaction has been used before
@@ -118,14 +121,15 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   } else {
     res.status(404);
     throw new Error('Order not found');
-  }
+  } */
+  res.json('Update order to paid');
 });
 
 // @desc    Update order to delivered
 // @route   GET /api/orders/:id/deliver
 // @access  Private/Admin
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id);
+  /* const order = await Order.findById(req.params.id);
 
   if (order) {
     order.isDelivered = true;
@@ -137,15 +141,17 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
   } else {
     res.status(404);
     throw new Error('Order not found');
-  }
+  } */
+  res.json('Update order to delivered');
 });
 
 // @desc    Get all orders
 // @route   GET /api/orders
 // @access  Private/Admin
 const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({}).populate('user', 'id name');
-  res.json(orders);
+  /* const orders = await Order.find({}).populate('user', 'id name');
+  res.json(orders); */
+  res.json('Get All Orders');
 });
 
 export {

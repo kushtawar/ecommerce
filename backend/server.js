@@ -4,6 +4,7 @@ import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import cookieParser from 'cookie-parser';
+import orderRoutes from './routes/orderRoutes.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -27,6 +28,7 @@ app.get('/api', (req, res) => {
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   const __dirname = path.resolve();
