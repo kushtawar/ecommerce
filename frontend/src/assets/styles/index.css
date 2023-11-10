@@ -117,3 +117,11 @@ table th {
   background-color: #366767;
   color: #f9f3f7 !important;
 }
+
+.highlighted-row {
+  background-color: rgb(
+    227,
+    249,
+    232
+  ); /* Choose your desired highlighting style */
+}

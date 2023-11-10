@@ -33,3 +33,22 @@ export const updateCart = (state) => {
 
   return state;
 };
+
+//
+
+export function formatToLocalTime(dateTimeString) {
+  const options = {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    fractionalSecondDigits: 3,
+    hour12: false,
+    timeZoneName: 'short',
+  };
+
+  const date = new Date(dateTimeString);
+  return date.toLocaleString(undefined, options);
+}
