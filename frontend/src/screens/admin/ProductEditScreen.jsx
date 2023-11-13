@@ -35,6 +35,8 @@ const ProductEditScreen = () => {
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
 
+  const [uploadProductImage, { isLoading: loadingUpload }] =
+    useUploadProductImageMutation();
   /* const [uploadProductImage, { isLoading: loadingUpload }] =
     useUploadProductImageMutation();
  */
@@ -85,17 +87,20 @@ const ProductEditScreen = () => {
     }
   }, [product]);
 
-  /* const uploadFileHandler = async (e) => {
+  const uploadFileHandler = async (e) => {
+    console.log('In Image filehandler-start');
     const formData = new FormData();
     formData.append('image', e.target.files[0]);
     try {
       const res = await uploadProductImage(formData).unwrap();
-      toast.success(res.message);
+      // toast.success(res.message);
       setImage(res.image);
+      console.log(image);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
-  }; */
+    console.log('In Image filehandler-end');
+  };
 
   return (
     <>
@@ -131,13 +136,16 @@ const ProductEditScreen = () => {
               ></Form.Control>
             </Form.Group>
 
-            {/* <Form.Group controlId="image">
+            <Form.Group controlId="image">
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter image url"
                 value={image}
-                onChange={(e) => setImage(e.target.value)}
+                onChange={(e) => {
+                  setImage(e.target.value);
+                  console.log('image', image);
+                }}
               ></Form.Control>
               <Form.Control
                 label="Choose File"
@@ -145,7 +153,7 @@ const ProductEditScreen = () => {
                 type="file"
               ></Form.Control>
               {loadingUpload && <Loader />}
-            </Form.Group> */}
+            </Form.Group>
 
             <Form.Group controlId="brand">
               <Form.Label>Brand</Form.Label>

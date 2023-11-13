@@ -39,8 +39,8 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <Navbar bg="primary" variant="dark" expand="md" collapseOnSelect>
+    <header className="headerBackground">
+      <Navbar variant="dark" expand="md" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>
@@ -154,6 +154,11 @@ const Header = () => {
                   <LinkContainer to="/admin/userlist">
                     <NavDropdown.Item className="custom-dropdown-item">
                       Users
+                    </NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/settings">
+                    <NavDropdown.Item className="custom-dropdown-item">
+                      Settings
                     </NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>

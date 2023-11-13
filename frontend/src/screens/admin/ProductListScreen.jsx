@@ -52,13 +52,18 @@ const ProductListScreen = () => {
   };
 
   var shouldHighlight = localStorage.getItem('highlight');
+  var highlightdone = localStorage.getItem('highlightdone');
   console.log('shouldHighlightinlist: ' + shouldHighlight);
+  console.log('highlightdone: ' + highlightdone);
   useEffect(() => {
-    if (shouldHighlight === 'true') {
-      //   console.log('Why am I reaching here::' + shouldHighlight);
-      //   updatedProductId = updatedProductId;
+    if (shouldHighlight === 'true' && highlightdone !== 'true') {
       updatedProductIdRef.current = updatedProductId;
+      highlightdone = localStorage.setItem('highlightdone', 'true');
+      //shouldHighlight = false;
       localStorage.setItem('highlight', 'false');
+    } else if (highlightdone === 'true') {
+      console.log('elseif: ');
+      highlightdone = false;
     } else {
       console.log('Do I reach here? ' + shouldHighlight);
       updatedProductIdRef.current = null;
@@ -67,21 +72,14 @@ const ProductListScreen = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldHighlight]);
   console.log('updatedProductId: ' + updatedProductIdRef.current);
-  /* useEffect(() => {
-    if (shouldHighlight === 'true') {
-      //   console.log('Why am I reaching here::' + shouldHighlight);
-      //   updatedProductId = updatedProductId;
-      localStorage.setItem('highlight', 'false');
-    } else {
-      console.log('Do I reach here? ' + shouldHighlight);
-      updatedProductId = null;
-      localStorage.setItem('highlight', 'false');
-    }
-  }, [shouldHighlight]); */
 
-  updatedProductId = shouldHighlight === 'true' ? updatedProductId : '';
+  highlightdone === 'false' && console.log('Final If');
 
-  console.log('updatedProductId: ' + updatedProductId);
+  updatedProductId =
+    highlightdone === 'false' ? '' : updatedProductIdRef.current;
+  //updatedProductId = shouldHighlight === 'true' ? updatedProductId : '';
+
+  console.log('updatedProductId is changed: ' + updatedProductId);
 
   return (
     <>
@@ -105,7 +103,7 @@ const ProductListScreen = () => {
       ) : (
         <>
           <div>ProductId is {updatedProductId}</div>
-          <Table striped bordered hover responsive className="table-sm">
+          <Table bordered hover responsive className="table-sm custom-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -125,7 +123,7 @@ const ProductListScreen = () => {
                   }
                 >
                   <td>
-                    {product._id === updatedProductId ? '*' : ''}
+                    {product._id === updatedProductId ? <sup>*</sup> : ''}
                     {product._id}
                   </td>
                   <td>{product.name}</td>
