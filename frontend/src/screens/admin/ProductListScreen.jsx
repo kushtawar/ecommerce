@@ -58,6 +58,7 @@ const ProductListScreen = () => {
   useEffect(() => {
     if (shouldHighlight === 'true' && highlightdone !== 'true') {
       updatedProductIdRef.current = updatedProductId;
+      // eslint-disable-next-line
       highlightdone = localStorage.setItem('highlightdone', 'true');
       //shouldHighlight = false;
       localStorage.setItem('highlight', 'false');

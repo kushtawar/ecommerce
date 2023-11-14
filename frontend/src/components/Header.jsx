@@ -17,6 +17,9 @@ import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 
 const Header = () => {
+  const theme = localStorage.getItem('theme');
+
+  console.log('savedtheme in header', theme);
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -39,11 +42,11 @@ const Header = () => {
   };
 
   return (
-    <header className="headerBackground">
-      <Navbar variant="dark" expand="md" collapseOnSelect>
+    <header>
+      <Navbar expand="md" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>
+            <Navbar.Brand className="navbarBrand">
               <img src={logo} alt="pic" className="rounded-circle img-50x50" />
               Shop
             </Navbar.Brand>
@@ -53,7 +56,7 @@ const Header = () => {
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
                 <NavLink className="d-md-none">
-                  <FaShoppingCart /> {/* Cart */}
+                  <FaShoppingCart className="navbarBrand" /> {/* Cart */}
                   {cartItems.length > 0 && (
                     <Badge
                       pill
@@ -80,7 +83,7 @@ const Header = () => {
                       display: 'inline-block',
                     }}
                   >
-                    <FaShoppingCart />
+                    <FaShoppingCart className="navbarBrand" />
                     {cartItems.length > 0 && (
                       <Badge
                         pill
@@ -112,6 +115,11 @@ const Header = () => {
                         Profile
                       </NavDropdown.Item>
                     </LinkContainer>
+                    <LinkContainer to="/settings">
+                      <NavDropdown.Item className="custom-dropdown-item">
+                        Settings
+                      </NavDropdown.Item>
+                    </LinkContainer>
                     <NavDropdown.Item
                       className="custom-dropdown-item"
                       onClick={logoutHandler}
@@ -138,7 +146,7 @@ const Header = () => {
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown
                   title="Admin"
-                  id="adminmenu"
+                  id="adminLink"
                   className="headerRightMargin"
                 >
                   <LinkContainer to="/admin/productlist">
@@ -154,11 +162,6 @@ const Header = () => {
                   <LinkContainer to="/admin/userlist">
                     <NavDropdown.Item className="custom-dropdown-item">
                       Users
-                    </NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/admin/settings">
-                    <NavDropdown.Item className="custom-dropdown-item">
-                      Settings
                     </NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>

@@ -1,72 +1,40 @@
-/* index.css */
-
-/* Dark theme variables */
-:root {
-  --main-bg-color: #e2e2eb;
-  --main-text-color: #0f0f0f;
-  --header-bg-color: rgb(134, 195, 242);
-  --header-text-color: #050505;
-  --main-price-color: #c50c0c;
-  --card-background-color: #ffffff;
-  --table-bg-even-color: #b5d7f0;
-  --table-bg-odd-color: #d4e5f1;
-  --table-row-color: #0e0d0d;
-}
-
-.green-theme {
-  --main-bg-color: #e2e2eb;
-  --main-text-color: #0f0f0f;
-  --header-bg-color: rgb(8, 77, 4);
-  --header-text-color: #050505;
-  --main-price-color: #c50c0c;
-  --card-background-color: #ffffff;
-  --table-bg-even-color: #b5f0ce;
-  --table-bg-odd-color: #39634b;
-  --table-row-color: #0e0d0d;
-}
-/* Light theme variables */
-.dark-theme {
-  --main-bg-color: #38383a;
-  --main-text-color: #f5efef;
-  --header-bg-color: rgb(19, 18, 18);
-  --header-text-color: #ffffff;
-  --main-price-color: #440cc5;
-  --card-background-color: #c5bebe;
-  --table-bg-even-color: #28292a;
-  --table-bg-odd-color: #585c5e;
-  --table-row-color: #ffffff;
-}
-
-table tr:nth-child(even) {
-  background-color: var(--table-bg-even-color);
-  color: var(--table-row-color) !important;
-}
-table tr:nth-child(odd) {
-  background-color: var(--table-bg-odd-color);
-  color: var(--table-row-color) !important;
-}
-
-/* Apply variables to components based on class */
-
+/* Dark theme */
 main {
   min-height: 80vh;
-  background-color: var(--main-bg-color);
-  color: var(--main-text-color);
+  background-color: #38383a;
+  color: #fff;
 }
-
-header {
-  background-color: var(--header-bg-color);
-  color: var(--header-text-color) !important;
-}
-
+.headerBackground,
 .footer-text {
-  background-color: var(--header-bg-color);
-  color: var(--header-text-color) !important;
+  background-color: rgb(3, 3, 3);
+  color: #f0f0e8 !important;
+}
+.footer-text {
   font-size: 0.5em;
   font-style: italic;
 }
 
-*/ .rating span {
+/* Light theme 
+
+main {
+  min-height: 80vh;
+  background-color: #38383a;
+  color: #fff;
+}
+.headerBackground,
+.footer-text {
+  background-color: rgb(3, 3, 3);
+  color: #f0f0e8 !important;
+}
+.footer-text {
+  font-size: 0.5em;
+  font-style: italic;
+}
+
+
+*/
+
+.rating span {
   margin: 0.1rem;
 }
 
@@ -156,24 +124,20 @@ table th {
 }
 
 .headerRightMargin {
-  margin-right: 20px;
-  color: var(--header-text-color) !important;
+  margin-right: 10px;
 }
 
 .dropdown-menu {
   min-width: fit-content !important;
   font-size: small !important; /* Change the font size */
-  color: #c13c90;
 }
 
 #username {
   width: fit-content;
-  color: var(--header-text-color) !important;
 }
 
 .dropdown-menu.show {
   margin-left: 40px;
-  color: var(--header-text-color) !important;
 }
 
 .dropdown-menu.show .custom-dropdown-item:hover {
@@ -191,23 +155,34 @@ table th {
   color: #c13c90 !important;
 }
 table {
-  background-color: rgb(195, 227, 243);
-  color: rgb(19, 18, 18) !important ;
+  background-color: #282626;
+  color: #f1eded !important;
 }
 
-#adminLink,
-#navbarBrand {
-  color: var(--header-text-color) !important;
+:root {
+  --main-background-light: #f5f5f5;
+  --main-text-light: #333;
+  --header-background-light: #fff;
+  --header-text-light: #333;
+
+  --main-background-dark: #222;
+  --main-text-dark: #ddd;
+  --header-background-dark: #333;
+  --header-text-dark: #ddd;
 }
 
-.navbarBrand {
-  color: var(--header-text-color) !important;
+body {
+  background-color: var(--main-background-light);
+  color: var(--main-text-light);
 }
 
-.priceColor {
-  color: var(--main-price-color) !important;
+.header {
+  background-color: var(--header-background-light);
+  color: var(--header-text-light);
 }
-
-.cardBackground {
-  background-color: var(--card-background-color) !important;
+body.dark {
+  background-color: #c13c90;
+}
+body.light {
+  background-color: aquamarine;
 }

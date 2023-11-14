@@ -1,20 +1,15 @@
-// settingsScreen.jsx
+// SettingsScreen.jsx
+import React from 'react';
 
-import React, { useState } from 'react';
-
-const SettingsScreen = () => {
-  const [theme, setTheme] = useState('light'); // Default theme is light
+const SettingsScreen = ({ theme = 'light', onThemeChange = () => {} }) => {
+  console.log('theme', theme);
 
   const handleThemeChange = (selectedTheme) => {
-    setTheme(selectedTheme);
-
-    // Save the selected theme in localStorage or any other persistent storage
-    localStorage.setItem('theme', selectedTheme);
+    onThemeChange(selectedTheme);
   };
 
   return (
-    <div>
-      <h2>Settings</h2>
+    <div className="py-3">
       <label>
         Select Theme:
         <select
@@ -23,6 +18,7 @@ const SettingsScreen = () => {
         >
           <option value="light">Light</option>
           <option value="dark">Dark</option>
+          <option value="green">Green</option>
           {/* Add more theme options if needed */}
         </select>
       </label>

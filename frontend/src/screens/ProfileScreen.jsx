@@ -10,6 +10,7 @@ import Loader from '../components/Loader';
 import { useProfileMutation } from '../slices/usersApiSlice';
 import { useGetMyOrdersQuery } from '../slices/ordersApiSlice';
 import { setCredentials } from '../slices/authSlice';
+import SettingsScreen from './SettingsScreen';
 
 const ProfileScreen = () => {
   const [name, setName] = useState('');
@@ -23,6 +24,34 @@ const ProfileScreen = () => {
 
   const [updateProfile, { isLoading: loadingUpdateProfile }] =
     useProfileMutation();
+
+  //
+  const [theme, setTheme] = useState('light');
+
+  /* useEffect(() => {
+    // Load theme from localStorage on initial render
+    const savedTheme = localStorage.getItem('theme');
+    document.body.classList.toggle('dark-theme', savedTheme === 'dark');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, []); */
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.body.classList.toggle(savedTheme, true); // Apply saved theme class to body
+    }
+  }, []);
+
+  const toggleTheme = (selectedTheme) => {
+    setTheme(selectedTheme);
+    localStorage.setItem('theme', selectedTheme);
+    document.body.classList.toggle('dark-theme', selectedTheme === 'dark');
+  };
+
+  //
 
   useEffect(() => {
     setName(userInfo.name);
@@ -99,6 +128,8 @@ const ProfileScreen = () => {
           <Button type="submit" variant="primary">
             Update
           </Button>
+
+          <SettingsScreen theme={theme} onThemeChange={toggleTheme} />
           {loadingUpdateProfile && <Loader />}
         </Form>
       </Col>
@@ -111,7 +142,7 @@ const ProfileScreen = () => {
             {error?.data?.message || error.error}
           </Message>
         ) : (
-          <Table striped hover responsive className="table-sm">
+          <Table hover responsive className="table-sm">
             <thead>
               <tr>
                 <th>ID</th>

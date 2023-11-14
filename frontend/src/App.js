@@ -1,25 +1,26 @@
-import React from 'react';
+// App.js
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import { Container } from 'react-bootstrap';
 import Footer from './components/Footer';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ThemeProvider } from './ThemeContext';
+import SettingsScreen from './screens/SettingsScreen';
 
 const App = () => {
   return (
-    <ThemeProvider>
+    <>
       <Header />
-      <main className="py-3">
+      <main>
         <Container>
-          {/* <h1 className="container text-center">eCommerce Shop</h1> */}
           <Outlet />
         </Container>
       </main>
       <Footer />
       <ToastContainer />
-    </ThemeProvider>
+      {/* <SettingsScreen theme={theme} onThemeChange={toggleTheme} /> */}
+    </>
   );
 };
 
