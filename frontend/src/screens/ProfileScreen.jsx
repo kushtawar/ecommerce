@@ -28,27 +28,22 @@ const ProfileScreen = () => {
   //
   const [theme, setTheme] = useState('light');
 
-  /* useEffect(() => {
-    // Load theme from localStorage on initial render
-    const savedTheme = localStorage.getItem('theme');
-    document.body.classList.toggle('dark-theme', savedTheme === 'dark');
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []); */
-
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       setTheme(savedTheme);
+      console.log('savedTheme', savedTheme);
       document.body.classList.toggle(savedTheme, true); // Apply saved theme class to body
     }
-  }, []);
+  }, [theme]);
 
-  const toggleTheme = (selectedTheme) => {
+  const handleThemeChange = (selectedTheme) => {
     setTheme(selectedTheme);
     localStorage.setItem('theme', selectedTheme);
-    document.body.classList.toggle('dark-theme', selectedTheme === 'dark');
+    document.body.classList.remove('light', 'dark-theme', 'green-theme');
+    console.log('selectedTheme', selectedTheme);
+    document.body.classList.add(selectedTheme);
+    setTheme(selectedTheme);
   };
 
   //
@@ -82,7 +77,7 @@ const ProfileScreen = () => {
   return (
     <Row>
       <Col md={3}>
-        <h2>User Profile</h2>
+        <h4>User Profile</h4>
 
         <Form onSubmit={submitHandler}>
           <Form.Group className="my-2" controlId="name">
@@ -129,7 +124,8 @@ const ProfileScreen = () => {
             Update
           </Button>
 
-          <SettingsScreen theme={theme} onThemeChange={toggleTheme} />
+          <SettingsScreen theme={theme} onThemeChange={handleThemeChange} />
+
           {loadingUpdateProfile && <Loader />}
         </Form>
       </Col>

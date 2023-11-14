@@ -1,4 +1,4 @@
-import { FaShoppingCart, FaUser } from 'react-icons/fa';
+import { FaShoppingCart, FaUser, FaCircle } from 'react-icons/fa';
 
 import {
   Navbar,
@@ -11,6 +11,7 @@ import {
 import React from 'react';
 import logo from '../assets/logo.png';
 import { LinkContainer } from 'react-router-bootstrap';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from '../slices/usersApiSlice';

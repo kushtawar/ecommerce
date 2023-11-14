@@ -4,10 +4,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer-text">
+    <footer id="footer" className="footer-text">
       <Container>
         <Row>
-          <Col className="text-center py-3">
+          <Col className="d-flex justify-content-center align-items-center py-3 my-2">
             <p>eCommerce &copy; {currentYear}</p>
           </Col>
         </Row>

@@ -1,6 +1,6 @@
 /* index.css */
 
-/* Dark theme variables */
+/* Light theme variables */
 :root {
   --main-bg-color: #e2e2eb;
   --main-text-color: #0f0f0f;
@@ -17,24 +17,24 @@
   --main-bg-color: #e2e2eb;
   --main-text-color: #0f0f0f;
   --header-bg-color: rgb(8, 77, 4);
-  --header-text-color: #050505;
+  --header-text-color: #f5efef;
   --main-price-color: #c50c0c;
   --card-background-color: #ffffff;
   --table-bg-even-color: #b5f0ce;
-  --table-bg-odd-color: #39634b;
+  --table-bg-odd-color: #4c7b61;
   --table-row-color: #0e0d0d;
 }
 /* Light theme variables */
 .dark-theme {
-  --main-bg-color: #38383a;
-  --main-text-color: #f5efef;
+  --main-bg-color: #343437;
+  --main-text-color: #ddd0d0;
   --header-bg-color: rgb(19, 18, 18);
   --header-text-color: #ffffff;
-  --main-price-color: #440cc5;
-  --card-background-color: #c5bebe;
+  --main-price-color: #cfcadd;
+  --card-background-color: #151313;
   --table-bg-even-color: #28292a;
   --table-bg-odd-color: #585c5e;
-  --table-row-color: #ffffff;
+  --table-row-color: #e1d7d7;
 }
 
 table tr:nth-child(even) {
@@ -132,11 +132,13 @@ table th {
   text-justify: auto;
   text-align: left;
   padding: 0.25em;
+  background-color: var(--card-background-color) !important;
+  color: var(--main-text-color) !important;
 }
 
 .arrow-button {
   font-size: 3em;
-  color: rgb(18, 17, 23);
+  color: var(--main-text-color) !important;
   background-color: transparent;
 }
 .img-50x50 {
@@ -208,6 +210,7 @@ table {
   color: var(--main-price-color) !important;
 }
 
-.cardBackground {
+.cardBackground,
+#card {
   background-color: var(--card-background-color) !important;
 }

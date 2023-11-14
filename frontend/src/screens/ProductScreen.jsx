@@ -53,14 +53,14 @@ const ProductScreen = () => {
           {error?.data?.message || error.error}
         </Message>
       ) : (
-        <>
+        <div>
           <Row>
-            <Col md={5}>
+            <Col className="my-2" md={5}>
               <Image src={product.image} alt={product.name} fluid />
             </Col>
-            <Col md={4}>
-              <ListGroup className="text-default" variant="flush">
-                <ListGroup.Item>
+            <Col className="my-2" md={4}>
+              <ListGroup variant="flush">
+                <ListGroup.Item className="text-default">
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -75,8 +75,8 @@ const ProductScreen = () => {
                 </ListGroup.Item>
               </ListGroup>
             </Col>
-            <Col md={3}>
-              <Card>
+            <Col className="my-2" md={3}>
+              <Card id="card" className="cardBackground">
                 <ListGroup variant="flush">
                   <ListGroup.Item>
                     <Row>
@@ -132,12 +132,12 @@ const ProductScreen = () => {
               </Card>
               <div className="d-flex justify-content-center">
                 <Link to="/">
-                  <FaChevronCircleLeft className="arrow-button my-3"></FaChevronCircleLeft>
+                  <FaChevronCircleLeft className="arrow-button my-3 "></FaChevronCircleLeft>
                 </Link>
               </div>
             </Col>
           </Row>
-        </>
+        </div>
       )}
     </>
   );
