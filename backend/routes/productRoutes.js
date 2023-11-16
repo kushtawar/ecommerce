@@ -14,6 +14,7 @@ import { protect, admin } from '../middleware/authMiddleware.js';
 const router = express.Router();
 console.log('In protection');
 router.route('/').get(getProducts).post(protect, admin, createProduct);
+router.route('/:id/reviews').post(protect, createProductReview);
 //router.route('/').get(getProducts);
 router
   .route('/:id')

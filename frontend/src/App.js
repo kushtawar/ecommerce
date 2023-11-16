@@ -10,7 +10,7 @@ import SettingsScreen from './screens/SettingsScreen';
 
 const App = () => {
   return (
-    <>
+    <div className="app-container">
       <Header />
       <main className="full-height">
         <Container>
@@ -20,7 +20,7 @@ const App = () => {
       <Footer />
       <ToastContainer />
       {/* <SettingsScreen theme={theme} onThemeChange={toggleTheme} /> */}
-    </>
+    </div>
   );
 };
 

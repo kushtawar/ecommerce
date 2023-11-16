@@ -62,8 +62,13 @@ main {
   min-height: 80vh;
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
+  flex-grow: 1;
 }
-
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 header {
   background-color: var(--header-bg-color);
   color: var(--header-text-color) !important;
@@ -111,6 +116,7 @@ table th {
   background: #f4f4f4;
   padding: 10px;
   border: 1px solid #ddd;
+  color: #4c7b61;
 }
 
 .review button {
@@ -212,5 +218,5 @@ table th {
 }
 
 .full-height {
-  min-height: 100vh;
+  min-height: 170vh;
 }
