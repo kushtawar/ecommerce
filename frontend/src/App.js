@@ -12,7 +12,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className="full-height">
         <Container>
           <Outlet />
         </Container>

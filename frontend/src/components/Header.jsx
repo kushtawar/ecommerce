@@ -8,7 +8,7 @@ import {
   NavDropdown,
   Badge,
 } from 'react-bootstrap';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../assets/logo.png';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -18,9 +18,7 @@ import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 
 const Header = () => {
-  const theme = localStorage.getItem('theme');
-
-  console.log('savedtheme in header', theme);
+  
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -28,6 +26,26 @@ const Header = () => {
   const navigate = useNavigate();
 
   const [logoutApiCall] = useLogoutMutation(); //RTK Mutation returns a tuplr
+
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+      console.log('savedTheme', savedTheme);
+      document.body.classList.toggle(savedTheme, true); // Apply saved theme class to body
+    }
+  }, [theme]);
+
+  const handleThemeChange = (selectedTheme) => {
+    setTheme(selectedTheme);
+    localStorage.setItem('theme', selectedTheme);
+    document.body.classList.remove('light', 'dark-theme', 'green-theme');
+    console.log('selectedTheme', selectedTheme);
+    document.body.classList.add(selectedTheme);
+    setTheme(selectedTheme);
+  };
 
   const logoutHandler = async () => {
     try {
@@ -121,6 +139,24 @@ const Header = () => {
                         Settings
                       </NavDropdown.Item>
                     </LinkContainer>
+                    <NavDropdown title="Theme">
+                      <NavDropdown.Item
+                        onClick={() => handleThemeChange('light')}
+                      >
+                        Light
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        onClick={() => handleThemeChange('dark')}
+                      >
+                        Dark
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        onClick={() => handleThemeChange('green')}
+                      >
+                        Green
+                      </NavDropdown.Item>
+                    </NavDropdown>
+
                     <NavDropdown.Item
                       className="custom-dropdown-item"
                       onClick={logoutHandler}

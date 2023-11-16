@@ -85,11 +85,17 @@ const ProductListScreen = () => {
   return (
     <>
       <Row className="align-items-center">
-        <Col>
-          <h1>Products</h1>
+        <Col className="align-items-center" md={11}>
+          <h2
+            className="py-3"
+            style={{ textAlign: 'center', justifyContent: 'right' }}
+          >
+            All Products
+          </h2>
         </Col>
-        <Col className="text-end">
-          <Button className="my-3" onClick={createProductHandler}>
+
+        <Col className="text-end" md={1}>
+          <Button className="my-1 btn-sm" onClick={createProductHandler}>
             <FaPlus /> Create Product
           </Button>
         </Col>
@@ -103,54 +109,56 @@ const ProductListScreen = () => {
         <Message variant="danger">{error.data.message}</Message>
       ) : (
         <>
-          <div>ProductId is {updatedProductId}</div>
-          <Table bordered hover responsive className="table-sm custom-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr
-                  key={product._id}
-                  className={
-                    product._id === updatedProductId ? 'highlighted-row' : ''
-                  }
-                >
-                  <td>
-                    {product._id === updatedProductId ? <sup>*</sup> : ''}
-                    {product._id}
-                  </td>
-                  <td>{product.name}</td>
-                  <td>${product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
-
-                  {/* Indicator */}
-                  <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
-                      <Button variant="light" className="btn-sm mx-2">
-                        <FaEdit />
-                      </Button>
-                    </LinkContainer>
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={() => deleteHandler(product._id)}
-                    >
-                      <FaTrash style={{ color: 'white' }} />
-                    </Button>
-                  </td>
+          {/* <div>ProductId is {updatedProductId}</div> */}
+          <Col className="align-items-center">
+            <Table bordered hover responsive className="table-sm custom-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>NAME</th>
+                  <th>PRICE</th>
+                  <th>CATEGORY</th>
+                  <th>BRAND</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr
+                    key={product._id}
+                    className={
+                      product._id === updatedProductId ? 'highlighted-row' : ''
+                    }
+                  >
+                    <td>
+                      {product._id === updatedProductId ? <sup>*</sup> : ''}
+                      {product._id}
+                    </td>
+                    <td>{product.name}</td>
+                    <td>${product.price}</td>
+                    <td>{product.category}</td>
+                    <td>{product.brand}</td>
+
+                    {/* Indicator */}
+                    <td>
+                      <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                        <Button variant="light" className="btn-sm mx-2">
+                          <FaEdit />
+                        </Button>
+                      </LinkContainer>
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => deleteHandler(product._id)}
+                      >
+                        <FaTrash style={{ color: 'white' }} />
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Col>
 
           {/*  <Paginate pages={data.pages} page={data.page} isAdmin={true} /> */}
         </>

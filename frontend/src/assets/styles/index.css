@@ -11,6 +11,8 @@
   --table-bg-even-color: #b5d7f0;
   --table-bg-odd-color: #d4e5f1;
   --table-row-color: #0e0d0d;
+  --table-headerbg-color: #2929c5;
+  --table-headertext-color: #e7dede;
 }
 
 .green-theme {
@@ -23,6 +25,8 @@
   --table-bg-even-color: #b5f0ce;
   --table-bg-odd-color: #4c7b61;
   --table-row-color: #0e0d0d;
+  --table-headerbg-color: rgb(0, 19, 0);
+  --table-headertext-color: #e7dede;
 }
 /* Light theme variables */
 .dark-theme {
@@ -32,9 +36,11 @@
   --header-text-color: #ffffff;
   --main-price-color: #cfcadd;
   --card-background-color: #151313;
-  --table-bg-even-color: #28292a;
-  --table-bg-odd-color: #585c5e;
+  --table-bg-even-color: #444648;
+  --table-bg-odd-color: #787c7e;
   --table-row-color: #e1d7d7;
+  --table-headerbg-color: #0e0d0d;
+  --table-headertext-color: #e7dede;
 }
 
 table tr:nth-child(even) {
@@ -45,7 +51,11 @@ table tr:nth-child(odd) {
   background-color: var(--table-bg-odd-color);
   color: var(--table-row-color) !important;
 }
-
+table th {
+  background-color: var(--table-headerbg-color) !important;
+  color: var(--table-headertext-color) !important;
+  border: 1px solid #d4e5f1; /* Add border style, color, and width */
+}
 /* Apply variables to components based on class */
 
 main {
@@ -182,20 +192,6 @@ table th {
   background-color: #366767;
   color: #f9f3f7 !important;
 }
-/*
-.highlighted-row {
-  background-color: #c13c90; 
-
-}
-*/
-
-.custom-table thead {
-  color: #c13c90 !important;
-}
-table {
-  background-color: rgb(195, 227, 243);
-  color: rgb(19, 18, 18) !important ;
-}
 
 #adminLink,
 #navbarBrand {
@@ -213,4 +209,8 @@ table {
 .cardBackground,
 #card {
   background-color: var(--card-background-color) !important;
+}
+
+.full-height {
+  min-height: 100vh;
 }

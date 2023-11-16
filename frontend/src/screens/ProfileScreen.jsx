@@ -77,7 +77,9 @@ const ProfileScreen = () => {
   return (
     <Row>
       <Col md={3}>
-        <h4>User Profile</h4>
+        <h4 className="py-3" style={{ textAlign: 'center' }}>
+          User Profile
+        </h4>
 
         <Form onSubmit={submitHandler}>
           <Form.Group className="my-2" controlId="name">
@@ -130,7 +132,9 @@ const ProfileScreen = () => {
         </Form>
       </Col>
       <Col md={9}>
-        <h2>My Orders</h2>
+        <h2 className="py-3" style={{ textAlign: 'center' }}>
+          My Orders
+        </h2>
         {isLoading ? (
           <Loader />
         ) : error ? (
@@ -139,7 +143,7 @@ const ProfileScreen = () => {
           </Message>
         ) : (
           <Table hover responsive className="table-sm">
-            <thead>
+            <thead className="thead-dark">
               <tr>
                 <th>ID</th>
                 <th>DATE</th>
