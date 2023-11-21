@@ -23,6 +23,7 @@ const ProductEditScreen = () => {
   const [description, setDescription] = useState('');
 
   // Inside ProductEditScreen component
+  // eslint-disable-next-line
   const [updatedProductId, setUpdatedProductId] = useState(null);
 
   const {
