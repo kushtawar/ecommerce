@@ -1,4 +1,4 @@
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 

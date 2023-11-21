@@ -1,4 +1,5 @@
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
+
 import {
   Navbar,
   Nav,
@@ -66,10 +67,12 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar expand="md" collapseOnSelect>
-        <Container fluid>
+      {/* Top line */}
+      <Navbar expand="md" className="justify-content-between">
+        <Container>
+          {/* Logo */}
           <LinkContainer to="/">
-            <Navbar.Brand className="navbarBrand d-flex align-items-center ">
+            <Navbar.Brand className="navbarBrand d-flex align-items-center">
               <img
                 src={logo}
                 alt="pic"
@@ -78,33 +81,21 @@ const Header = () => {
               <span>Shop</span>
             </Navbar.Brand>
           </LinkContainer>
-          <SearchBox className="d-none d-md-block my-2" />
-
-          <Navbar className="alignRight">
-            <LinkContainer className="mx-1" to="/cart">
-              <NavLink className=" d-md-inline ">
+          {/* SearchBox always visible */}
+          <SearchBox className="d-none d-md-block" />
+          {/* Cart, User Info, Admin Links */}
+          <Nav className="ms-auto">
+            {/* Cart */}
+            <LinkContainer to="/cart">
+              <NavLink className="d-none d-md-inline">
                 <FaShoppingCart className="navbarBrand" />
                 {cartItems.length > 0 && (
-                  <Badge
-                    pill
-                    bg="orange"
-                    style={{
-                      marginLeft: '0px',
-                      fontSize: '0.5em',
-                      position: 'relative',
-                      top: -9,
-                      right: -1,
-                      backgroundColor: 'orange',
-                    }}
-                  >
-                    {cartItems.reduce((a, c) => a + c.qty, 0)}
-                  </Badge>
+                  <Badge pill>{cartItems.reduce((a, c) => a + c.qty, 0)}</Badge>
                 )}
               </NavLink>
             </LinkContainer>
-
             {userInfo ? (
-              <Nav className="ms-auto">
+              <>
                 <NavDropdown
                   // Add a custom class to the NavDropdown
                   title={userInfo.name}
@@ -162,9 +153,9 @@ const Header = () => {
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
-              </Nav>
+              </>
             ) : (
-              <Nav>
+              <>
                 <LinkContainer to="/login">
                   <NavLink className="d-md-none">
                     <FaUser /> Sign In
@@ -175,26 +166,55 @@ const Header = () => {
                     <FaUser />
                   </NavLink>
                 </LinkContainer>
-              </Nav>
+              </>
             )}
-          </Navbar>
-          {/* Admin Links */}
-
-          <Navbar.Toggle
-            aria-controls="search-nav"
-            className="d-md-none"
-          ></Navbar.Toggle>
-          <Navbar.Collapse
-            id="basic-navbar-nav"
-            className="justify-content-end"
-          ></Navbar.Collapse>
+            {/* Admin Links */}
+            {userInfo && userInfo.isAdmin && (
+              <NavDropdown
+                title="Admin"
+                id="adminLink"
+                className="headerRightMargin"
+              >
+                <LinkContainer to="/admin/productlist">
+                  <NavDropdown.Item className="custom-dropdown-item">
+                    Products
+                  </NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/admin/orderlist">
+                  <NavDropdown.Item className="custom-dropdown-item">
+                    Orders
+                  </NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/admin/userlist">
+                  <NavDropdown.Item className="custom-dropdown-item">
+                    Users
+                  </NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
+            )}
+          </Nav>
         </Container>
       </Navbar>
-      <Container fluid>
-        <SearchBox className="d-block d-md-none my-2" />
-      </Container>
+
+      {/* Medium and Small Screen Menu */}
+      <Navbar expand="md" className="d-md-none justify-content-end">
+        <Container>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              {/* Sample Menu Items */}
+              <LinkContainer to="/sample1">
+                <Nav.Link>Sample 1</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/sample2">
+                <Nav.Link>Sample 2</Nav.Link>
+              </LinkContainer>
+              {/* ... Add more sample items */}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     </header>
   );
 };
-
 export default Header;

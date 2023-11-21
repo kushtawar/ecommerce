@@ -11,6 +11,7 @@ import {
   Button,
   Form,
 } from 'react-bootstrap';
+import Meta from '../components/Meta';
 import { toast } from 'react-toastify';
 import {
   useGetProductDetailsQuery,
@@ -19,11 +20,7 @@ import {
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import {
-  FaArrowCircleLeft,
-  FaArrowLeft,
-  FaChevronCircleLeft,
-} from 'react-icons/fa';
+import { FaChevronCircleLeft } from 'react-icons/fa';
 // import Meta from '../components/Meta';
 import { addToCart } from '../slices/cartSlice';
 
@@ -80,7 +77,7 @@ const ProductScreen = () => {
         </Message>
       ) : (
         <>
-          {/* <Meta title={product.name} description={product.description} /> */}
+          <Meta title={product.name} description={product.description} />
           <Row>
             <Col md={6}>
               <Image src={product.image} alt={product.name} fluid />

@@ -28,7 +28,7 @@ const UserListScreen = () => {
 
   return (
     <>
-      <h1>Users</h1>
+      <h1 className="screenmainheader wincobold text-center">Users</h1>
       {isLoading ? (
         <Loader />
       ) : error ? (
