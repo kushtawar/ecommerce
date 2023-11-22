@@ -4,12 +4,19 @@ import { FaTimes } from 'react-icons/fa';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { useGetOrdersQuery } from '../../slices/ordersApiSlice';
+import Meta from '../../components/Meta';
 
 const OrderListScreen = () => {
   const { data: orders, isLoading, error } = useGetOrdersQuery();
+  const ordersCount = orders ? orders.length : 0;
 
+  // Set title and description based on orders count
+  const pageTitle = `Orders (${ordersCount})`; // Example format: "Orders (5)"
+  const pageDescription = `Currently there are ${ordersCount} orders in the system.`; // Example description
   return (
     <>
+      {/* <Meta title="Admin Order" description="Admin Order Screen" /> */}
+      <Meta title={pageTitle} description={pageDescription} />
       <h1 className="screenmainheader wincobold text-center">Orders</h1>
       {isLoading ? (
         <Loader />

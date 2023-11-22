@@ -207,7 +207,7 @@ table th {
 }
 
 .headerRightMargin {
-  margin-right: 20px;
+  margin-right: 5px;
   color: var(--header-text-color) !important;
 }
 
@@ -272,7 +272,9 @@ table th {
 }
 @media (max-width: 768px) {
   .w-100 {
-    width: 60%; /* Adjust the width for smaller screens */
+    width: 50%; /* Adjust the width for smaller screens */
+    margin: 0 !important;
+    padding: 0 !important;
   }
 }
 @media (max-width: 992px) {
@@ -280,8 +282,43 @@ table th {
     display: block !important;
   }
 }
+
+/* Carousel.css */
+/* Add or modify the existing CSS file for your Carousel component */
+
+.custom-carousel {
+  /* Style the entire carousel container if needed */
+  background-color: #64a9ef98; /* Example background color */
+  /* Add other styles as needed */
+  color: #0d0d0e;
+}
+
 .img-carousel {
-  max-width: 100%; /* Allow the image to resize based on content */
-  max-height: 400px; /* Set your desired max height */
-  margin-right: 15px;
+  width: 90%; /* Ensure the image fills the container width */
+  max-width: '500px';
+  left: 40;
+  max-height: 500px; /* Adjust the height as needed for your design */
+  object-fit: cover; /* Maintain aspect ratio and cover the entire space */
+  font: 1em sans-serif;
+}
+
+.carousel-caption {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  padding: 10px; /* Adjust padding if necessary */
+  color: white; /* Set the text color */
+  background: none; /* Remove background color */
+  text-align: center; /* Align text as needed */
+  font-size: 16px; /* Set the font size */
+}
+
+/* Changing the carousel control arrow color */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1); /* Changing the arrow color to black */
+}
+.placeholder-content {
+  width: 80%;
 }

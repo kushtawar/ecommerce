@@ -2,6 +2,7 @@ import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import Meta from '../components/Meta';
 import { useGetProductsQuery } from '../slices/productsApiSlice';
 import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
@@ -32,6 +33,7 @@ const HomeScreen = () => {
         </Message>
       ) : (
         <>
+          <Meta title="Flove!!" description="Flove Description" />
           <h1 className="screenmainheader wincobold text-center">
             Latest Products
           </h1>

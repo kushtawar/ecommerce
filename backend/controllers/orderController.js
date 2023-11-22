@@ -143,7 +143,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 const getOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find({}).populate('user', 'id name');
   res.json(orders);
-  res.json('Get All Orders');
+  // res.json('Get All Orders');
 });
 
 export {

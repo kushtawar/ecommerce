@@ -1,4 +1,4 @@
-import { FaShoppingCart, FaUser } from 'react-icons/fa';
+import { FaShoppingCart, FaUser, FaUserCog } from 'react-icons/fa';
 import {
   Navbar,
   Nav,
@@ -8,6 +8,7 @@ import {
   Badge,
 } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
+import Meta from './Meta';
 import logo from '../assets/logo.png';
 import { LinkContainer } from 'react-router-bootstrap';
 import SearchBox from './SearchBox';
@@ -26,6 +27,7 @@ const Header = () => {
   const [logoutApiCall] = useLogoutMutation(); //RTK Mutation returns a tuplr
 
   const [theme, setTheme] = useState('light');
+
   const [themeDropdownOpen, setThemeDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -66,6 +68,7 @@ const Header = () => {
 
   return (
     <header>
+      <Meta />
       <Navbar expand="md" collapseOnSelect>
         <Container fluid>
           <LinkContainer to="/">
@@ -179,7 +182,35 @@ const Header = () => {
             )}
           </Navbar>
           {/* Admin Links */}
-
+          <Navbar className="noPadding">
+            {userInfo && userInfo.isAdmin && (
+              <NavDropdown
+                title={
+                  <span>
+                    <FaUserCog className="admin-icon" />
+                  </span>
+                }
+                id="adminLink"
+                className="headerRightMargin"
+              >
+                <LinkContainer to="/admin/productlist">
+                  <NavDropdown.Item className="custom-dropdown-item">
+                    Products
+                  </NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/admin/orderlist">
+                  <NavDropdown.Item className="custom-dropdown-item">
+                    Orders
+                  </NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/admin/userlist">
+                  <NavDropdown.Item className="custom-dropdown-item">
+                    Users
+                  </NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
+            )}
+          </Navbar>
           <Navbar.Toggle
             aria-controls="search-nav"
             className="d-md-none"
